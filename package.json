@@ -1,0 +1,21 @@
+{
+  "name": "@agentrouter/pi",
+  "version": "0.1.0",
+  "description": "Price and run research tools in Pi with AgentRouter, a spending cap and receipts.",
+  "type": "module",
+  "keywords": ["pi-package", "agentrouter", "mcp", "research"],
+  "pi": {
+    "extensions": ["./extensions/agentrouter.js"],
+    "skills": ["./skills"]
+  },
+  "files": ["extensions", "skills"],
+  "engines": { "node": ">=22.19.0" },
+  "peerDependencies": { "@earendil-works/pi-coding-agent": ">=1.6.0 <2" },
+  "peerDependenciesMeta": { "@earendil-works/pi-coding-agent": { "optional": true } },
+  "scripts": { "test": "node --test test/*.test.js" },
+  "repository": { "type": "git", "url": "git+https://github.com/pageonelab/agentrouter-pi.git" },
+  "homepage": "https://www.agentrouter.to/tools?utm_source=pi&utm_medium=plugin",
+  "publishConfig": { "access": "public" },
+  "author": "PageOneLab",
+  "license": "MIT"
+}
