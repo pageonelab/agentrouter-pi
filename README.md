@@ -1,6 +1,6 @@
 # AgentRouter for Pi
 
-Look up what a provider tool costs, run a query with a USD cap, and retrieve the result and receipt. A bundled skill compares competitors across Google search results and Reddit discussions. Browse the [AgentRouter tool catalog](https://www.agentrouter.to/tools?utm_source=pi&utm_medium=plugin).
+Look up what a provider tool costs, run a query with an optional USD cap, and retrieve the result and receipt. A bundled skill compares competitors across Google search results and Reddit discussions. Browse the [AgentRouter tool catalog](https://www.agentrouter.to/tools?utm_source=pi&utm_medium=plugin).
 
 ## Install
 
@@ -11,7 +11,7 @@ pi install npm:@agentrouter/pi
 pi
 ```
 
-To install from source, run `pi install git:github.com/pageonelab/agentrouter-pi@v0.1.0`. In an existing Pi session, use `/reload`.
+To install from source, run `pi install git:github.com/pageonelab/agentrouter-pi@v0.1.1`. In an existing Pi session, use `/reload`.
 
 ## Try a free price check
 
@@ -29,6 +29,6 @@ In Pi, run `/mcp login agentrouter` and finish the browser sign-in. Pi stores th
 
 > /skill:agentrouter-competitor-brief Compare vercel.com and netlify.com for “frontend hosting” in US English. Show me the prices first.
 
-The extension exposes four MCP tools: find, describe, invoke and get run. A paid invocation requires the current pricing version, an idempotency key, a USD ceiling, and interactive confirmation before the request goes to AgentRouter. Provider inputs go to AgentRouter and the selected provider. Use the returned run ID to retrieve a receipt. When using RPC, the client must handle approval dialogs. Print and JSON modes block paid calls.
+The extension exposes four MCP tools: find, describe, invoke and get run. A paid invocation requires the current pricing version, an idempotency key and interactive confirmation. A USD ceiling is optional. The user reviews the charge terms before the request goes to AgentRouter. Provider inputs go to AgentRouter and the selected provider. Use the returned run ID to retrieve a receipt. When using RPC, the client must handle approval dialogs. Print and JSON modes block paid calls.
 
 [AgentRouter MCP and account setup](https://docs.agentrouter.to/integrations/mcp?utm_source=pi&utm_medium=plugin) · [Research examples with receipts](https://docs.agentrouter.to/examples?utm_source=pi&utm_medium=plugin) · [Pi MCP guide](https://docs.pi.dev/latest/mcp)
