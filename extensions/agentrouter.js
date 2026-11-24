@@ -24,8 +24,8 @@ export default function agentRouter(pi) {
         })
         if (!response.ok) throw new Error('HTTP ' + response.status)
         const { title, pricing } = await response.json()
-        const cap = pricing.max_per_call_usd == null ? 'The ceiling depends on the input.' : 'Maximum per call: USD ' + pricing.max_per_call_usd
-        ctx.ui.notify([title, pricing.summary, cap].join('\n'), 'info')
+        const cap = pricing.estimated_per_call_usd == null ? pricing.summary : 'Estimated per call: USD ' + pricing.estimated_per_call_usd
+        ctx.ui.notify([title, cap].join('\n'), 'info')
       } catch (error) {
         ctx.ui.notify('Could not read the AgentRouter price: ' + error.message, 'error')
       }
@@ -35,7 +35,7 @@ export default function agentRouter(pi) {
   pi.on('tool_call', async (event, ctx) => {
     if (event.toolName !== 'mcp__agentrouter__invoke_tool') return
     const { tool_id, input, pricing_version, max_cost_usd, idempotency_key } = event.input ?? {}
-    if (typeof max_cost_usd !== 'string' || !/^(0|[1-9]\d*)(\.\d{1,12})?$/.test(max_cost_usd)) {
+    if (max_cost_usd != null && (typeof max_cost_usd !== 'string' || !/^(0|[1-9]\d*)(\.\d{1,12})?$/.test(max_cost_usd))) {
       return { block: true, reason: 'Quote this call and supply max_cost_usd as a nonnegative decimal string.' }
     }
     if (!tool_id || !pricing_version || typeof idempotency_key !== 'string' || !idempotency_key.trim()) {
@@ -44,7 +44,7 @@ export default function agentRouter(pi) {
     if (ctx.hasUI) {
       try {
         const approved = await ctx.ui.confirm('Approve AgentRouter call?', [
-          'Tool: ' + JSON.stringify(tool_id), 'Maximum: USD ' + max_cost_usd, 'Input: ' + JSON.stringify(input),
+          'Tool: ' + JSON.stringify(tool_id), max_cost_usd == null ? 'Billed at actual usage under your account budgets.' : 'Maximum: USD ' + max_cost_usd, 'Input: ' + JSON.stringify(input),
         ].join('\n'))
         if (approved === true) return
       } catch {

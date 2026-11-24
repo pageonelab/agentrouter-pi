@@ -1,7 +1,7 @@
 {
   "name": "@agentrouter/pi",
-  "version": "0.1.0",
-  "description": "Price and run research tools in Pi with AgentRouter, a spending cap and receipts.",
+  "version": "0.1.1",
+  "description": "Price and run research tools in Pi with AgentRouter, an optional spending cap and receipts.",
   "type": "module",
   "keywords": ["pi-package", "agentrouter", "mcp", "research"],
   "pi": {
